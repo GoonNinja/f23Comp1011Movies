@@ -1,5 +1,7 @@
 package com.example.f23comp1011movies;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -11,7 +13,7 @@ import java.nio.file.Paths;
 public class APIUtility {
 
     //This method calls the OMBD API with a movie title passed in as an arguement
-    public static void callAPI(String movieName) throws IOException, InterruptedException {
+    public static ApiResponse callAPI(String movieName) throws IOException, InterruptedException {
 
         //If we received "Star Wars", we need to translate that to be "Star%20Wars"
         movieName = movieName.replaceAll(" ", "%20");
@@ -25,10 +27,15 @@ public class APIUtility {
 
 
         //This will save a file called movies.json with the API's response
-        HttpResponse<Path> httpResponse = client.send(httpRequest, HttpResponse.BodyHandlers
-                                         .ofFile(Paths.get("movies.json")));
+//        HttpResponse<Path> httpResponse = client.send(httpRequest, HttpResponse.BodyHandlers
+//                                         .ofFile(Paths.get("movies.json")));
+
+         HttpResponse<String> httpResponse = client.send(httpRequest, HttpResponse.BodyHandlers
+                                         .ofString());
+
+
+        Gson gson = new Gson();
+        return gson.fromJson(httpResponse.body(), ApiResponse.class);
     }
-
-
 
 }
