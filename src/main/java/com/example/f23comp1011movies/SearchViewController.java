@@ -73,12 +73,14 @@ public class SearchViewController {
         ApiResponse apiResponse =  APIUtility.callAPI(movieName);
 
         if(apiResponse.getMovies() != null){
+            posterImageView.setVisible(true);
             titlesVBox.setVisible(true);
             listView.getItems().clear();
             listView.getItems().addAll(apiResponse.getMovies());
             resultsMsgLabel.setText("Showing " + listView.getItems().size() + " Of " + apiResponse.getTotalResults());
         }
         else {
+            posterImageView.setVisible(false);
             titlesVBox.setVisible(false);
             msgLabel.setVisible(true);
             msgLabel.setText("Enter a movie title.");
