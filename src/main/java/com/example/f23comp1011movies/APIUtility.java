@@ -1,7 +1,9 @@
 package com.example.f23comp1011movies;
 
 import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -36,6 +38,27 @@ public class APIUtility {
 
         Gson gson = new Gson();
         return gson.fromJson(httpResponse.body(), ApiResponse.class);
+
+    }
+
+    public static ApiResponse getMoviesFromFiles(String fileName){
+
+        Gson gson = new Gson();
+        //This is called a try...with resources when we use the ().
+        //Anything created inside the ( ) will auto have the .close() called once
+        //the resource is not required.
+        try(
+                FileReader fileReader = new FileReader(fileName);
+                JsonReader jsonReader = new JsonReader(fileReader);
+                )
+        {
+            return gson.fromJson(jsonReader, ApiResponse.class);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+
     }
 
 }

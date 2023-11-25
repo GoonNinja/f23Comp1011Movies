@@ -7,7 +7,8 @@ public class TempTester {
     public static void main(String[] args) throws IOException, InterruptedException {
 
         try{
-            APIUtility.callAPI("Titanic");
+
+            ApiResponse apiResponse = APIUtility.getMoviesFromFiles("movies.json");
         }
         catch (Exception e){
             e.printStackTrace();

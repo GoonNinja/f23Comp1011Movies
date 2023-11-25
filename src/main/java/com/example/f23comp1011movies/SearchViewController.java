@@ -2,6 +2,7 @@ package com.example.f23comp1011movies;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
@@ -87,6 +88,11 @@ public class SearchViewController {
         }
     }
 
+    @FXML
+    void getMovieDetails(ActionEvent event) throws IOException {
+        Movie movieSelected = listView.getSelectionModel().getSelectedItem();
+        SceneChanger.changeScenes(event,"info-view.fxml", movieSelected.getImdbID());
 
+    }
 
 }
