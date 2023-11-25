@@ -32,12 +32,38 @@ public class APIUtility {
 //        HttpResponse<Path> httpResponse = client.send(httpRequest, HttpResponse.BodyHandlers
 //                                         .ofFile(Paths.get("movies.json")));
 
-         HttpResponse<String> httpResponse = client.send(httpRequest, HttpResponse.BodyHandlers
-                                         .ofString());
+        HttpResponse<String> httpResponse = client.send(httpRequest, HttpResponse.BodyHandlers
+                .ofString());
 
 
         Gson gson = new Gson();
         return gson.fromJson(httpResponse.body(), ApiResponse.class);
+
+    }
+
+    public static MovieDetails getMovieDetails(String imdbID) throws IOException, InterruptedException {
+
+        //If we received "Star Wars", we need to translate that to be "Star%20Wars"
+        imdbID = imdbID.replaceAll(" ", "%20");
+
+
+        String uri = "http://www.omdbapi.com/?apikey=37968102&i=" + imdbID;
+        //Configure the environment to make a HTTP request
+        //This includes an update to the module-info.java file
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(uri)).build();
+
+
+        //This will save a file called movies.json with the API's response
+//        HttpResponse<Path> httpResponse = client.send(httpRequest, HttpResponse.BodyHandlers
+//                                         .ofFile(Paths.get("movies.json")));
+
+        HttpResponse<String> httpResponse = client.send(httpRequest, HttpResponse.BodyHandlers
+                .ofString());
+
+
+        Gson gson = new Gson();
+        return gson.fromJson(httpResponse.body(), MovieDetails.class);
 
     }
 

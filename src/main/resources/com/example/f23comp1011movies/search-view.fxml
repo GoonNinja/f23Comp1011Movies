@@ -8,12 +8,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane prefHeight="1000.0" prefWidth="900.0" stylesheets="@../../../styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.f23comp1011movies.SearchViewController">
    <children>
-      <VBox alignment="BOTTOM_CENTER" prefHeight="1000.0" prefWidth="735.0" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="BOTTOM_CENTER" layoutX="-8.0" prefHeight="1000.0" prefWidth="735.0" spacing="30.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-8.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
@@ -34,7 +35,14 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
                         </ListView>
-                        <Label fx:id="resultsMsgLabel" stylesheets="@../../../styles.css" text="Label" />
+                        <BorderPane>
+                           <right>
+                              <Button fx:id="fetchAllButton" mnemonicParsing="false" onAction="#fetchAllMovies" text="Fetch All" BorderPane.alignment="CENTER" />
+                           </right>
+                           <left>
+                              <Label fx:id="resultsMsgLabel" stylesheets="@../../../styles.css" text="Label" BorderPane.alignment="CENTER" />
+                           </left>
+                        </BorderPane>
                      </children>
                   </VBox>
                   <VBox fx:id="selectedVBox" alignment="CENTER">

@@ -26,7 +26,7 @@ public class SceneChanger {
 
     }
 
-    public static void changeScenes(ActionEvent event, String fxmlFileName, String imbdID) throws IOException {
+    public static void changeScenes(ActionEvent event, String fxmlFileName, String imbdID) throws IOException, InterruptedException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(fxmlFileName));
         Scene scene = new Scene(fxmlLoader.load());
